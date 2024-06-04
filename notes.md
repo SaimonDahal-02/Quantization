@@ -24,3 +24,14 @@ Let's say we want to quantize a tensor in 4-bit and we choose group-size = 32 sy
 It means that we actually quantizing the tensor in 4.5 bits since we have:
 - 4 bit (each element is store in 4 bit)
 - 16 / 32 bit (scale in 16 bits for every 32 elements)
+
+# Inference for Linear Quantization
+In a neural network, we can quantize the weights but also the activation. Depending on what we quantize, the storage and the computation are not the same!
+
+| Storage | Computation |
+|---|---|
+| Quantized Weight + Activation(eg: W8A32) | floating point arithmetics (FP32, FP16, BF16, ..)|
+|Quantized Weight + Quantized Activation (eg: W8A8) | Integer based arithmetics (INT8, INT4, ..)
+
+Note: We need to dequantize the weights to perform the floating point computation!
+Integer based arithmetics is not supported by all hardware.
