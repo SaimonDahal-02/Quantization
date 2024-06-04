@@ -18,7 +18,7 @@ def linear_q_symmetric(tensor, dtype=torch.int8):
     scale = get_q_scale_symmetric(tensor)
 
     quantized_tensor = linear_q_with_scale_and_zero_point(
-        tensor=test_tensor, scale=scale, zero_point=0, dtype=torch.int8
+        tensor=tensor, scale=scale, zero_point=0, dtype=torch.int8
     )
     # in symmetric quantization zero point is 0
     return quantized_tensor, scale
