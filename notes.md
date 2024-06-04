@@ -13,3 +13,14 @@
 In summary, the zero point serves as an essential component in quantization, ensuring accurate representation and alignment between real and quantized values. Symmetric quantization leverages the inherent symmetry to avoid the need for an explicit zero point²³. 
 
 Symmetric quantization schemes center the input range around 0, eliminating the need to calculate a zero-point offset. However, for skewed signals (like non-negative activations), this can result in suboptimal quantization resolution due to the clipping range including values that never appear in the input.
+
+# Quantization 
+## Different Granularities
+
+Per-group quantization can require a lot more memory.
+
+Let's say we want to quantize a tensor in 4-bit and we choose group-size = 32 symmetric mode (z=0), and we store the scales in FP16
+
+It means that we actually quantizing the tensor in 4.5 bits since we have:
+- 4 bit (each element is store in 4 bit)
+- 16 / 32 bit (scale in 16 bits for every 32 elements)
